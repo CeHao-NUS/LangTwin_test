@@ -1,0 +1,15 @@
+[API start]
+The following are external APIs you can call. They are in JSON format.
+{
+    'name': 'Articulation Model',
+    'input': ['CV Point Cloud', 'actionable part name'],
+    'output': ['actionable part position', 'joint type', 'joint parameters'],
+}
+
+{
+    'name': 'Deformable Model',
+    'input': ['CV Point Cloud', 'deformable part name'],
+    'output': ['deformable part position', 'deformable part hardness']
+}
+
+[API end]

@@ -1,0 +1,46 @@
+[Instruction Start]
+You need to analyze how to finish the task considering the following questions: 
+- What is the actionable part of this object to finish the task? If the gripper cannot hold the whole object, you need to call 
+an external API to segment and locate the actionable part. 
+- What is the constraints when interact with this object. For example, a drawer has prismatic joint constraint and a door has a 
+revolute joint constraint. When there are certain constraint the restricts the manipulation, you should also call an external API to 
+identify the type of the constraint and model the constraint. 
+- What should the robot arm does to finish the task. At this moment, you are consider the actionable part and physical constraints. 
+
+Your answer should describe the manipulation task in several steps. If the manipulatoin has more steps, you should use more blocks.
+In each step, please answer in the JSON block format, the following is an example. 
+{
+    "Task": "Open the drawer.",
+    "Steps":
+[{
+    "Step": 1,
+    "Perception": [],
+    "Actionability": [],
+    "Constraint": []
+    "Movement": []
+}
+
+{
+    "Step": 2,
+    "Perception": [],
+    "Actionability": [],
+    "Constraint": []
+    "Movement": []
+}]
+}
+
+- The perception means which external API should be used. You only need to call their name.
+When the perception is not empty, it means you use one or more external API.
+
+- The actionability is which part should the gripper act. The empty actionability is to grasp the whole object by default. 
+The actionability must use suitable perception to locate the actionable part.
+You must make sure the actionability is necessary for current movement.
+
+- The constraint is the restriction when manipulate the object. When the current movement is free, the constraint should be empty.
+The constraint must use suitbale perception to help you identify the constraint type and parameters. 
+
+- The movement means how the robot arm should do. And the movement cannot be empty, and it must tell how the robot moves. 
+Also, if the manipulation has more than one movement, you should divide the movement and put then into more JSON blocks.
+The individual movements are "move", "grasp", "release". They should not show in the same movement. 
+
+[Instruction End]
