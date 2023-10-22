@@ -12,6 +12,7 @@ def main(task, file_name):
     robot_prompt = read_txt_file('prompts/robots/franka.txt')
     scene_prompt = read_txt_file('prompts/scenes/test_scene.txt')
 
+    all_reasoning = read_txt_file('prompts/tasks/all_reasoning.txt')
     raw_reasoning = read_txt_file('prompts/tasks/raw_reasoning.txt')
     initial_reasoning = read_txt_file('prompts/tasks/initial_reasoning.txt')
     traj_gen = read_txt_file('prompts/tasks/traj_generation.txt')
@@ -39,28 +40,51 @@ def main(task, file_name):
         {API_prompt} \n \
         This time do NOT use [Step Start] and [Step End] \n \
         "
+    
+    prompt_all = f" \
+        We will should you the Instructoin, Robot, Scene, and Task in the following. They are quote in [xxx Start] and [xxx End] \n \
+        Please answer sequentially according to the instructions. \n \
+        {all_reasoning} \n \
+        {robot_prompt} \n \
+        {scene_prompt} \n \
+        [Task Start] {task} [Task End] \n \
+    "
+
     t0 = time.time()
-    ans = completor.answer(prompt)
+    ans = completor.answer(prompt_all)
     # print(ans)
 
     t1 = time.time()
-    # print(f"Time1: {t1-t0}")
+    print(f"Time1: {t1-t0}")
 
-    # write_txt_file(file_name, ans )
+    write_txt_file(file_name, ans )
 
-    ans2 = completor.answer(prompt2)
-    # print(ans2)
+    # ans2 = completor.answer(prompt2)
+    # # print(ans2)
     # t2 = time.time()
     # print(f"Time2: {t2-t1}")
 
     # js = convert_str_to_json(ans2)
     # print('js \n', js)
 
-    write_txt_file(file_name, ans + '\n' + ans2)
+    # write_txt_file(file_name, ans + '\n' + ans2)
     print(file_name)
 
 
-def temp(task):
+# import openai  # for OpenAI API calls
+# from tenacity import (
+#     retry,
+#     stop_after_attempt,
+#     wait_random_exponential,
+# )  # for exponential backoff
+
+
+# @retry(wait=wait_random_exponential(min=1, max=60), stop=stop_after_attempt(6))
+# def completion_with_backoff(**kwargs):
+#     return main(**kwargs)
+
+
+def try_many_times(task):
     path = os.path.join("./results", task)
     mkdir(path)
     
@@ -70,20 +94,34 @@ def temp(task):
 
 if __name__ == "__main__":
 
+    tasks = []
     task1 = 'Open the drawer on the desk by 0.2 meters.'
+    tasks.append(task1)
     task2 = "Open the cabinet door by 30 degrees."
-    task3 = "Put the pen from the desk to the closed drawer."
-    task4 = "Put the apple from the desk to the cabinet."
+    tasks.append(task2)
 
-    tasks = [task1, task2, task3, task4]
+
+    task3 = "Put the pen from the desk to the closed drawer."
+    tasks.append(task3)
+    task4 = "Put the apple from the desk to the cabinet."
+    tasks.append(task4)
+
+    
+    task5 = "Put the pear from the drawer to the cabinet."
+    tasks.append(task5)
+
+    task6 = "Put the apple from the drawer to the table."
+    tasks.append(task6)
+
+    
 
     import os
     from multiprocessing import Process
     import multiprocessing
 
-    with multiprocessing.Pool(processes=5) as pool:
+    with multiprocessing.Pool(processes=3) as pool:
         # Use the map function to apply the worker function to the list of numbers
-        pool.map(temp, tasks)
+        pool.map(try_many_times, tasks)
 
 
     # print('Done!')
