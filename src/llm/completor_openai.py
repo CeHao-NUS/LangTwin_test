@@ -24,8 +24,8 @@ class OpenAICompletor:
 
     def _get_completion(self):
         response = openai.ChatCompletion.create(
-        # model = 'gpt-3.5-turbo',
-        model = 'gpt-4',
+        model = 'gpt-3.5-turbo',
+        # model = 'gpt-4',
         messages = self.messages,
         temperature = 0,
         )

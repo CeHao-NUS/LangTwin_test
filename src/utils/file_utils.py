@@ -1,5 +1,6 @@
 
 import json
+import os
 
 # ================ JSON ================
 # JSON file reader
@@ -26,4 +27,10 @@ def read_txt_file(file_path):
 def write_txt_file(file_path, data):
     with open(file_path, 'w') as txt_file:
         txt_file.write(data)
+
+# ================ dir ================
+def mkdir(dir_path):
+    if not os.path.exists(dir_path):
+        os.makedirs(dir_path)
+
 

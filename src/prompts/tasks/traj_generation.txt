@@ -10,7 +10,7 @@ identify the type of the constraint and model the constraint.
 Your answer should describe the manipulation task in several steps. If the manipulatoin has more steps, you should use more blocks.
 In each step, please answer in the JSON block format, the following is an example. 
 {
-    "Task": "Open the drawer.",
+    "Task": "",
     "Steps":
 [{
     "Step": 1,
