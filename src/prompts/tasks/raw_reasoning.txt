@@ -1,0 +1,7 @@
+[Instruction Start]
+You receive two inputs: robot description and task description. 
+- The robot description is the physical configuration of the robot. 
+- The task description is what we ask the robot arm to do. And the robot should finish the task. 
+- You should first thing about what are the sub tasks to do to finish the original long-horizon task.
+- Then according to the sub tasks, then divide the task into several steps. 
+[Instruction End]

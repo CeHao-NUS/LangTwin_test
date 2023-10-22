@@ -10,7 +10,9 @@ def main(task, file_name):
     openai.api_key = api_key
 
     robot_prompt = read_txt_file('prompts/robots/franka.txt')
+    scene_prompt = read_txt_file('prompts/scenes/test_scene.txt')
 
+    raw_reasoning = read_txt_file('prompts/tasks/raw_reasoning.txt')
     initial_reasoning = read_txt_file('prompts/tasks/initial_reasoning.txt')
     traj_gen = read_txt_file('prompts/tasks/traj_generation.txt')
 
@@ -20,9 +22,10 @@ def main(task, file_name):
 
     prompt = f" \
     Please answer how to finish the robot manipulation task. \n \
-    We will show you the descript of robot arm, instruction to follow, task to finish. \n \
+    We will show you the descript of robot arm, scene, instruction to follow, task to finish. \n \
     For each block, we use the [xxx Start] and [xxx End] to denote the start and end. \n\
     {robot_prompt} \n \
+    {scene_prompt} \n \
     {initial_reasoning} \n \
     Task: {task} \n \
     Please answer in [Step Start] and [Step End] \n \
@@ -38,21 +41,24 @@ def main(task, file_name):
         "
     t0 = time.time()
     ans = completor.answer(prompt)
-    print(ans)
+    # print(ans)
 
     t1 = time.time()
-    print(f"Time1: {t1-t0}")
+    # print(f"Time1: {t1-t0}")
+
+    # write_txt_file(file_name, ans )
 
     ans2 = completor.answer(prompt2)
-    print(ans2)
-    t2 = time.time()
-    print(f"Time2: {t2-t1}")
+    # print(ans2)
+    # t2 = time.time()
+    # print(f"Time2: {t2-t1}")
 
-    js = convert_str_to_json(ans2)
-    print('js \n', js)
+    # js = convert_str_to_json(ans2)
+    # print('js \n', js)
 
     write_txt_file(file_name, ans + '\n' + ans2)
-    # write_json_file('test.json', js)
+    print(file_name)
+
 
 def temp(task):
     path = os.path.join("./results", task)
@@ -64,10 +70,10 @@ def temp(task):
 
 if __name__ == "__main__":
 
-    task1 = 'Open the drawer on the table by 0.2 meters.'
-    task2 = "Open the fridge door by 30 degrees."
-    task3 = "Put the pen from the table to the closed drawer."
-    task4 = "Put the apple from the table to the fridge."
+    task1 = 'Open the drawer on the desk by 0.2 meters.'
+    task2 = "Open the cabinet door by 30 degrees."
+    task3 = "Put the pen from the desk to the closed drawer."
+    task4 = "Put the apple from the desk to the cabinet."
 
     tasks = [task1, task2, task3, task4]
 
@@ -78,3 +84,6 @@ if __name__ == "__main__":
     with multiprocessing.Pool(processes=5) as pool:
         # Use the map function to apply the worker function to the list of numbers
         pool.map(temp, tasks)
+
+
+    # print('Done!')

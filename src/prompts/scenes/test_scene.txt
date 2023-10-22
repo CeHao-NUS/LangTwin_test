@@ -1,0 +1,9 @@
+
+[Scene Start]
+You are in an office. There is a desk in front of you. 
+There are a pen and an apple on the desk. And this desk has a closed drawer with a handle.
+You should open the drawer when you put things into the drawer.
+There is also a cabinet under the desk with a door. The door also has a handle and it is closed. 
+You should open the door when you put things into the cabinet.
+When you put things in to the drawer or cabinet, you need to open it first and close it afterwards
+[Scene End]

@@ -1,8 +1,25 @@
 [Instruction Start]
 You receive two inputs: robot description and task description. 
 - The robot description is the physical configuration of the robot. 
-- The task description is what we ask the robot arm to do. And the robot should fiinish the task. 
+- The task description is what we ask the robot arm to do. And the robot should finish the task. 
+- You should first thing about what are the sub tasks to do to finish the original long-horizon task.
+- Then according to the sub tasks, then divide the task into several steps. 
 
-Please divide the task into several steps. The steps could be moving the end effector or grasping or
- manipulating an object or part of the object. You should also consider the actionable part and constraint when finishing the task.
+We use <> to quote keywords that represent the target position. Please include <> in the answer.
+We list some primitive action template, and you can only change the words in <>.
+
+The action primitives are in the quotation: 
+"
+1. MOVE end-effector to <>.
+2. GRASP <> with gripper hand.
+3. RELEASE gripper hand.
+"
+
+Note that when moving the end-effector, you should consider the constraints like articulation and other obstacles.
+When grasping the object with gripper hand, you should consider which part is actionable. 
+The gripper hand can only GRASP one thing. You must RELEASE before next GRASP.
+
+An example is, when you put an appele to the closed drawer, you should first open the drawer, then put the apple into the drawer, and finally 
+close the drawer.
+
 [Instruction End]
