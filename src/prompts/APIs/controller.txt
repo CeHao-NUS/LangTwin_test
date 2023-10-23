@@ -1,0 +1,25 @@
+[Controller Start]
+The following are Controller Functions you can use. 
+
+{
+    "Name": "Move",
+    "Function": "Move the gripper hand to the "Target" position.",
+    "Input": ["Target", "Actionable", "Constraint"],
+    "Output": ["Trajectory to the target position."],
+}
+
+{
+    "Name": "Grasp",
+    "Function": "Close the gripper hand to grasp the object at "Target" position.",
+    "Input": ["Target"],
+    "Output": ["Trajectory to grasp the target object."],
+}
+
+{
+    "Name": "Release",
+    "Function": "Open the gripper hand to place the object in hand",
+    "Input": [],
+    "Output": ["Trajectory to release the gripper hand."],
+}
+
+[Controller End]

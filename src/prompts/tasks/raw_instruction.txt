@@ -1,0 +1,6 @@
+[Instruction Start]
+In the instruction, you need to sequentially finish several works. 
+For each work, please use "==== Work x ===" before the answers. x is 1,2,3 and so on.
+Your final answer should have both Work 1, Work 2 and Work 3.
+The inputs are provided with [xxx Start] and [xxx End] outside this instruction.
+[Instruction End]

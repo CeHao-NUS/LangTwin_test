@@ -12,6 +12,13 @@ class OpenAICompletor:
         ans = self._get_completion()
         self._add_answer(ans)
         return self._last_message()
+    
+    def get_all_answers(self):
+        ans = ""
+        for message in self.messages:
+            if message['role'] == 'assistant':
+                ans += (message['content'] + "\n")
+        return ans
 
     def _last_message(self):
         return self.messages[-1]['content']

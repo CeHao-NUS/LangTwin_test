@@ -1,0 +1,39 @@
+[Work 2 Start]
+Inputs: Robot, Scene, Task, Results in Work 1.
+Outputs: Detailed steps to finish the task.
+
+- From results in work 1, you need to consider the more details to finish the task.
+- You need to move the robot hand and close or open the gripper hand to manipulate object.
+- When grasping the object, find the actionable part of the object. 
+- When moving the object, consider the physical constraint of the object.
+- In the answers, use double backtick marks to quote the movement, (e.g. ``grasp``); use angle bracket to quote the target position (e.g. <apple>).
+- Use sharp symbol to quote the actionabe keywords, (e.g. #actionable#).
+- Use double sharp symbol to quote the constraint key words, (e.g. ##revolute joint constraint##) 
+
+
+- You should answer like this examples in tripple asterisk.
+
+Task: put an apple into a drawer.
+Answer: 
+***
+==== Work 2 ====
+Sub-task 1: Open the drawer.
+1. ``Move`` to the #actionable# <drawer handle>. 
+2. ``Grasp`` the #actionable# <drawer handle>. 
+3. ``Move`` to <drawer open position> with ## drawer prismatic joint constraint##. 
+4. ``Release`` the gripper hand.
+
+Sub-task 2: Pick the apple and place into the drawer.
+1. ``Move``  to the #actionable# <apple>. 
+2. ``Grasp`` the #actionable# <apple>.
+3. ``Move`` to the <inside drawer position>.
+4. ``Release`` the gripper hand.
+
+Sub-task 3: Close the drawer.
+1. ``Move`` to the <outside drawer position>.
+2. ``Move`` the gripper hand to the #actionable# <drawer handle>. 
+3. ``Grasp`` the #actionable# <drawer handle>. 
+4. ``Move`` to <drawer close position> with ##drawer prismatic joint constraint##. 
+5. ``Release`` the gripper hand.
+***
+[Work 2 End]

@@ -1,0 +1,16 @@
+[Perception start]
+The following are Perception Functions you can use. 
+
+{
+    "Name": "Articulation Model",
+    "Function": "Recognize the articulated object and built the articulation model. Use the model to infer open and close position, and inside and outside position."
+    "Output": ["joint type", "joint constraint", "object open position", "object close position"],
+}
+
+{
+    "name": "Detect",
+    "Function": "Detect the position of the object at the "Actionable" part of this step.",
+    "Output": ["three dimensional position of artionable part"],
+}
+
+[Perception end]

@@ -1,22 +1,82 @@
+[Instruction Start]
+In the instruction, you need to sequentially finish several works. 
+For each work, please use "==== Work x ===" before the answers. x is 1,2, and so on.
+Your final answer should have both Work 1 and Work 2.
+The inputs are provided with [xxx Start] and [xxx End] outside this instruction.
+
+[Work 1 Start]
+Inputs: Robot, Scene, Task.
+Outputs: Sub-tasks to finish the task.
+
+- You are a robot arm, and you are asked to finish one task. You will get Inputs as above, and output steps to finish the task.
+- The Robot input describes the physical configuration of the robot. 
+- The Scene input describes the objects and their properties in the environment.
+- The Task input tells the target that the robot arm need to finish.
+- For each step, you should only give the sub tasks from a high-level perspective.
+
+- You should answer like this example in tripple asterisk.
+
+Task: put an apple into a drawer.
+Answer: 
+***
+==== Work 1 ====
+1. Open the drawer. (gripper hand is empty)
+2. Pick the apple and place into the drawer. (gripper hand is empty)
+3. Close the drawer. (gripper hand is empty)
+***
+
+- Note that "pick and place" must be in the same sub task. You cannot "pick" first and do not "place" the object.
+- You need to check the gripper hand is empty after each sub task.
+- If the task is a single sub task, such as "Open the drawer", then you should use this example in the following tripple asterisk:
+
+Task: Open the drawer.
+Answer: 
+***
+==== Work 1 ====
+1. Open the drawer. 
+***
+
+[Work 1 End]
+
+[Work 2 Start]
+Inputs: Robot, Scene, Task, Results in Work 1.
+Outputs: Detailed steps to finish the task.
+
+- From results in work 1, you need to consider the more details to finish the task.
+- You need to move the robot hand and close or open the gripper hand to manipulate object.
+- When grasping the object, find the actionable part of the object. 
+- When moving the object, consider the physical constraint of the object.
+- If the object is not in the Scene, you need to "detect" the object with perception.
+- In the answers, use double backtick marks to quote the movement, (e.g. ``grasp``); use angle bracket to quote the object (e.g. <apple>).
+- use sharp symbol to quote the actionabe or constraint keywords, (e.g. #actionable#, #revolute joint constraint#).
+
+
+- You should answer like this examples in tripple asterisk.
+
+Task: put an apple into a drawer.
+Answer: 
+***
 ==== Work 2 ====
 Sub-task 1: Open the drawer.
-1. ``Move`` the gripper hand to the #actionable# <drawer handle>. 
+1. ``Move`` to the #actionable# <drawer handle>. 
 2. ``Grasp`` the #actionable# <drawer handle>. 
-3. ``Move`` the gripper hand to ``drawer open position`` with #prismatic joint constraint#. 
+3. ``Move`` to <drawer open position> with #prismatic joint constraint#. 
 4. ``Release`` the gripper hand.
 
-Sub-task 2: Pick the apple.
-1. ``Move`` the gripper hand to the #actionable# <apple>. 
+Sub-task 2: Pick the apple and place into the drawer
+1. ``Move``  to the #actionable# <apple>. 
 2. ``Grasp`` the #actionable# <apple>.
+3. ``Move`` to the <inside drawer position>.
+4. ``Release`` the gripper hand.
 
-Sub-task 3: Place the apple into the drawer. 
-1. ``Move`` the gripper hand to the <inside drawer position>.
-2. ``Release`` the gripper hand.
-
-Sub-task 4: Close the drawer.
-1. ``Move`` the gripper hand to the <outside drawer position>.
+Sub-task 3: Close the drawer.
+1. ``Move`` to the <outside drawer position>.
 2. ``Move`` the gripper hand to the #actionable# <drawer handle>. 
-3. ``Move`` the #actionable# <drawer handle>. 
-4. ``Move`` the gripper hand to ``drawer close position`` with #prismatic joint constraint#. 
+3. ``Grasp`` the #actionable# <drawer handle>. 
+4. ``Move`` to <drawer close position> with #prismatic joint constraint#. 
 5. ``Release`` the gripper hand.
 ***
+[Work 2 End]
+
+
+[Instruction End]
