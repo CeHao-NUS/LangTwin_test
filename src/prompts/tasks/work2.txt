@@ -5,10 +5,14 @@ Outputs: Detailed steps to finish the task.
 - From results in work 1, you need to consider the more details to finish the task.
 - You need to move the robot hand and close or open the gripper hand to manipulate object.
 - When grasping the object, find the actionable part of the object. 
+- If the task requires interaction with an object part (as opposed to the object as a whole), describe which part of the object would be most suitable for the gripper to interact with.
 - When moving the object, consider the physical constraint of the object.
+- Make sure to consider the object widths, lengths, and heights so that the gripper hand does not collide with another object or with the tabletop.
+- When the gripper hand need to pick or place the object inside a container, it must first move "inside" and "outside" the container.
 - In the answers, use double backtick marks to quote the movement, (e.g. ``grasp``); use angle bracket to quote the target position (e.g. <apple>).
 - Use sharp symbol to quote the actionabe keywords, (e.g. #actionable#).
 - Use double sharp symbol to quote the constraint key words, (e.g. ##revolute joint constraint##) 
+- For every ``Move`` step, check if has constraints and write the analysis in (# contents).
 
 
 - You should answer like this examples in tripple asterisk.
@@ -18,22 +22,22 @@ Answer:
 ***
 ==== Work 2 ====
 Sub-task 1: Open the drawer.
-1. ``Move`` to the #actionable# <drawer handle>. 
+1. ``Move`` to the #actionable# <drawer handle>. (# ``move`` to <drawer handle> is free from constraint.)
 2. ``Grasp`` the #actionable# <drawer handle>. 
-3. ``Move`` to <drawer open position> with ## drawer prismatic joint constraint##. 
+3. ``Move`` to <drawer open position> with ## drawer prismatic joint constraint##. (# ``move`` to <drawer open position> has ## drawer prismatic joint constraint##.)
 4. ``Release`` the gripper hand.
 
 Sub-task 2: Pick the apple and place into the drawer.
-1. ``Move``  to the #actionable# <apple>. 
+1. ``Move``  to the #actionable# <apple>. (# ``move`` to <apple> is free from constraint.)
 2. ``Grasp`` the #actionable# <apple>.
-3. ``Move`` to the <inside drawer position>.
+3. ``Move`` to the <inside drawer position>. (# ``move`` into <drawer> has container boundary constraint, so must move to <drawer inside position>.)
 4. ``Release`` the gripper hand.
+5. ``Move`` to the <outside drawer position>. (# ``move`` away from <drawer> has container boundary constraint, so must move to <drawer outside position>.)
 
 Sub-task 3: Close the drawer.
-1. ``Move`` to the <outside drawer position>.
-2. ``Move`` the gripper hand to the #actionable# <drawer handle>. 
-3. ``Grasp`` the #actionable# <drawer handle>. 
-4. ``Move`` to <drawer close position> with ##drawer prismatic joint constraint##. 
-5. ``Release`` the gripper hand.
+1. ``Move`` the gripper hand to the #actionable# <drawer handle>. (# ``move`` to <drawer handle> is free from constraint.)
+2. ``Grasp`` the #actionable# <drawer handle>. 
+3. ``Move`` to <drawer close position> with ##drawer prismatic joint constraint##. (# ``move`` to <drawer close position> has ## drawer prismatic joint constraint##.)
+4. ``Release`` the gripper hand.
 ***
 [Work 2 End]

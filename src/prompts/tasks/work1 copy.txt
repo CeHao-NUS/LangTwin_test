@@ -2,33 +2,35 @@
 Inputs: Robot, Scene, Task.
 Outputs: Sub-tasks to finish the task.
 
+Preliminary: 
+You must remember that this conversation is a monologue, and that you are in control. I am not able to assist you with any questions, 
+and you must output the final code yourself by making use of the available information, common sense, and general knowledge.
+
 - You are a robot arm, and you are asked to finish one task. You will get Inputs as above, and output steps to finish the task.
 - The Robot input describes the physical configuration of the robot. 
 - The Scene input describes the objects and their properties in the environment.
 - The Task input tells the target that the robot arm need to finish.
 - For each step, you should only give the sub tasks from a high-level perspective.
+- Make a self-check after the results of sub-tasks that "The gripper hand must always be empty after each sub-task.". Otherwise, you regenerate the sub tasks again.
 
-- Note that "pick" and "place" must be in the same sub task. Otherwise, change the sequence of sub tasks.
-- You need to check the gripper hand is empty after each sub task. 
 
-- You should answer like this example in tripple asterisk. Do not include tripple asterisk in the answer.
-- If any "self check" is false, provide an new answer in tripple asterisk after the original answer. "Revise" the results to make "self check" true.
-- Repeat the "self check" and "revise" until all "self check" is true.
+- You should answer like this example in tripple asterisk.
 
 Task: put an apple into a drawer.
 Answer: 
 ***
 ==== Work 1 ====
-Sub tasks:
 1. Open the drawer. (gripper hand is empty)
 2. Pick the apple and place into the drawer. (gripper hand is empty)
 3. Close the drawer. (gripper hand is empty)
 
-Self check:
-1. Gripper hand is always empty after each sub task. True.
+Self-check:
+1. The gripper hand must always be empty after each sub-task. This is ture for every sub task.
+2. If one or more gripper hand is not empty, regenerate another list of sub tasks in the following.
 ***
 
-
+- Note that "pick and place" must be in the same sub task. You cannot "pick" first and do not "place" the object.
+- You need to make sure "gripper hand is empty" after each sub task.
 - If the task is a single sub task, such as "Open the drawer", then you should use this example in the following tripple asterisk:
 
 Task: Open the drawer.

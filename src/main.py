@@ -96,16 +96,16 @@ def try_many_times(task):
 if __name__ == "__main__":
 
     tasks = []
-    # task1 = 'Open the drawer on the desk by 0.2 meters.'
-    # tasks.append(task1)
-    # task2 = "Open the cabinet door by 30 degrees."
-    # tasks.append(task2)
+    task1 = 'Open the drawer on the desk by 0.2 meters.'
+    tasks.append(task1)
+    task2 = "Open the cabinet door by 30 degrees."
+    tasks.append(task2)
 
 
-    # task3 = "Put the pen from the desk to the closed drawer."
-    # tasks.append(task3)
-    # task4 = "Put the apple from the desk to the cabinet."
-    # tasks.append(task4)
+    task3 = "Put the pen from the desk to the closed drawer."
+    tasks.append(task3)
+    task4 = "Put the apple from the desk to the cabinet."
+    tasks.append(task4)
 
     
     task5 = "Put the pear from the drawer to the cabinet."
