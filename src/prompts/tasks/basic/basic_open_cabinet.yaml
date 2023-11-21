@@ -1,0 +1,3 @@
+Task: Open the cabinet door by 30 degrees.
+Scene: test_scene.txt
+Robot: franka.txt

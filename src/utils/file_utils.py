@@ -1,5 +1,6 @@
 
 import json
+import yaml
 import os
 
 # ================ JSON ================
@@ -27,6 +28,17 @@ def read_txt_file(file_path):
 def write_txt_file(file_path, data):
     with open(file_path, 'w') as txt_file:
         txt_file.write(data)
+
+# ================ yaml ================
+# yaml file reader
+def read_yaml_file(file_path):
+    with open(file_path, 'r') as yaml_file:
+        return yaml.safe_load(yaml_file)
+    
+# yaml file writer
+def write_yaml_file(file_path, data):
+    with open(file_path, 'w') as yaml_file:
+        yaml.safe_dump(data, yaml_file)
 
 # ================ dir ================
 def mkdir(dir_path):

@@ -1,27 +1,36 @@
-import openai
+import os
 from utils.file_utils import *
 from llm.completor_openai import OpenAICompletor
 import time
 
+TASK_DIR = "./prompts/tasks"
+SCENE_DIR = "./prompts/scenes"
+ROBOT_DIR = "./prompts/robots"
+api_key = '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'
+
 def main(task, file_name): 
-    api_key = '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'
-    openai.api_key = api_key
 
-    robot_prompt = read_txt_file('prompts/robots/franka.txt')
-    scene_prompt = read_txt_file('prompts/scenes/test_scene.txt')
+    task_dir = os.path.join(TASK_DIR, task + ".yaml")
+    config = read_yaml_file(task_dir)
+    task_prompt = f"[Task Start] \n {config['Task']} \n [Task End]"
 
+    scene_dir = os.path.join(SCENE_DIR, config['Scene'])
+    scene_prompt = read_txt_file(scene_dir)
+
+    robot_dir = os.path.join(ROBOT_DIR, config['Robot'])
+    robot_prompt = read_txt_file(robot_dir)
+    
     perception_API = read_txt_file('prompts/APIs/perception.txt')
     controller_API = read_txt_file('prompts/APIs/controller.txt')
 
-    completor = OpenAICompletor()
-
+    completor = OpenAICompletor(api_key)
 
     # call one by one
     t1 = time.time()
-    raw_intruction = read_txt_file('prompts/tasks/raw_instruction.txt')
-    work1 = read_txt_file('prompts/tasks/work1.txt')
-    work2 = read_txt_file('prompts/tasks/work2.txt')
-    work3 = read_txt_file('prompts/tasks/work3.txt')
+    raw_intruction = read_txt_file('prompts/works/raw_instruction.txt')
+    work1 = read_txt_file('prompts/works/work1.txt')
+    work2 = read_txt_file('prompts/works/work2.txt')
+    work3 = read_txt_file('prompts/works/work3.txt')
 
     initial_system = f" \
         - We will should you the Instructoin, Robot, Scene, and Task in the following. They are quote in [xxx Start] and [xxx End] \n \
@@ -29,7 +38,7 @@ def main(task, file_name):
         {raw_intruction} \n \
         {robot_prompt} \n \
         {scene_prompt} \n \
-        [Task Start] {task} [Task End] \n \
+        {task_prompt} \n \
     "
 
     completor.add_system(initial_system)
@@ -63,40 +72,28 @@ def main(task, file_name):
 
 
 
-def try_many_times(task):
+def try_many_times(task, times=1):
     path = os.path.join("./results", task)
     mkdir(path)
     
-    for i in range(5):
+    for i in range(times):
         file_name = os.path.join(path, "result" + str(i) + ".txt")
         main(task, file_name)
 
 if __name__ == "__main__":
 
-    tasks = []
-    task1 = 'Open the drawer on the desk by 0.2 meters.'
-    tasks.append(task1)
-    task2 = "Open the cabinet door by 30 degrees."
-    tasks.append(task2)
+    tasks = os.listdir(TASK_DIR)
+    tasks = [task[:-5] for task in tasks]
+    try_many_times(tasks[1], times=1)
 
+    # import os
+    # from multiprocessing import Process
+    # import multiprocessing
 
-    task3 = "Put the pen from the desk to the closed drawer."
-    tasks.append(task3)
-    task4 = "Put the apple from the desk to the cabinet."
-    tasks.append(task4)
-    
-    task5 = "Put the pear from the drawer to the cabinet."
-    tasks.append(task5)
-    task6 = "Put the apple from the drawer to the table."
-    tasks.append(task6)
-
-    import os
-    from multiprocessing import Process
-    import multiprocessing
-
-    with multiprocessing.Pool(processes=2) as pool:
+    # with multiprocessing.Pool(processes=2) as pool:
         # Use the map function to apply the worker function to the list of numbers
-        pool.map(try_many_times, tasks)
+        # pool.map(try_many_times, tasks)
 
+    # try_many_times(task1)
 
     # print('Done!')

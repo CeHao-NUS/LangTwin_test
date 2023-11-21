@@ -1,0 +1,3 @@
+Task: Assuming you're facing the cabinet, pull out the middle drawer, for example, 30 centimeters.
+Scene: open_articulated_object_primastic.txt
+Robot: franka.txt

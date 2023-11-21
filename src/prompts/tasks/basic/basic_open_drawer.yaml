@@ -1,0 +1,3 @@
+Task: Open the drawer on the desk by 0.2 meters.
+Scene: test_scene.txt
+Robot: franka.txt

@@ -1,0 +1,5 @@
+Task: > 
+  Assuming you're facing the microwave, open the door to, for instance, 
+  a 50-degree angle, or to an angle suitable for inputing an object.
+Scene: open_articulated_object_single_part.txt
+Robot: franka.txt

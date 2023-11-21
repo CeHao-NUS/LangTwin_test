@@ -1,0 +1,3 @@
+Task: pick up the red bowl and place it on white bowl.
+Scene: pick_and_place_pose.txt
+Robot: franka.txt
