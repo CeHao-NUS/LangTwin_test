@@ -3,8 +3,6 @@ from utils.file_utils import *
 from llm.completor_openai import OpenAICompletor
 import time
 
-
-
 def main(task, file_name): 
     api_key = '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'
     openai.api_key = api_key
@@ -19,7 +17,6 @@ def main(task, file_name):
 
     completor = OpenAICompletor()
 
-    
     # call all at once
     '''
     prompt_all = f" \
@@ -80,7 +77,7 @@ def main(task, file_name):
     print(f"Time2: {t2-t1}")
 
     ans = completor.get_all_answers()
-    write_txt_file(file_name, ans )
+    write_txt_file(file_name, ans)
     print(file_name)
 
 
@@ -106,15 +103,11 @@ if __name__ == "__main__":
     tasks.append(task3)
     task4 = "Put the apple from the desk to the cabinet."
     tasks.append(task4)
-
     
     task5 = "Put the pear from the drawer to the cabinet."
     tasks.append(task5)
-
     task6 = "Put the apple from the drawer to the table."
     tasks.append(task6)
-
-    
 
     import os
     from multiprocessing import Process
