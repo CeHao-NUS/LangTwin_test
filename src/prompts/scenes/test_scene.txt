@@ -1,4 +1,3 @@
-
 [Scene Start]
 You are in an office. There is a desk in front of you. 
 There are a pen and an apple on the desk. And this desk has a closed drawer with a handle.

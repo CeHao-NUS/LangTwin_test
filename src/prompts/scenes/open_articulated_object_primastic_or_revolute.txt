@@ -1,0 +1,8 @@
+[Scene Start]
+You are in a bedroom. In front of you, there is a cabinet that includes three drawers and two doors. Each part's information includes details about the joint axis and the handle, listed as follows:
+{joint 1: prismatic joint, origin at [0.3, 0.0, 0.1], joint axis of [-1, 0, 0], handle 1: center at [0.1, 0.0, 0.05];
+joint 2: prismatic joint, origin at [0.27, 0.0, 0.25], joint axis of [-1, 0, 0], handle 2: center at [0.08, 0.0, 0.20];
+joint 3: prismatic joint, origin at [0.25, 0.0, 0.35], joint axis of [-1, 0, 0], handle 3: center at [0.05, 0.0, 0.30];
+joint 4: revolute joint, origin at [-0.3, 0.0, 0.1], joint axis of [0, 0, 1], handle 3: center at [0.00, 0.0, 0.25];
+joint 5: revolute joint, origin at [0.5, 0.0, 0.1], joint axis of [0, 0, 1], handle 4: center at [0.2, 0.0, 0.28];}
+[Scene End]

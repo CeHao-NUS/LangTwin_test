@@ -1,0 +1,9 @@
+[Scene Start]
+There is a desk in front of you. Currently,
+ there are several objects on the desk, listed as follows: {object 1: a red apple;
+ object 2: a green pear;
+ object 3: an orange;
+ Object 4: a hammer;
+ object 5: a red bowl;
+ object 6: a white bowl;}.
+[Scene End]

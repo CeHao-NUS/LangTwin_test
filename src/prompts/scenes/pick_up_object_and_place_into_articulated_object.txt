@@ -1,0 +1,8 @@
+[Scene Start]
+There is a desk in front of you. Currently, there are several objects on the desk, listed as follows: {object 1: a red apple; object 2: a green pear; object 3: an orange; object 4: a hammer;
+object 5: a red bowl; object 6: a white bowl; }.
+There is a cabinet that includes three drawers. Each part's information includes details about the joint axis and the handle, listed as follows:
+{joint 1: prismatic joint, origin at [0.3, 0.2, 0.1], joint axis of [-1, 0, 0], handle 1: center at [0.1, 0.2, 0.05];
+joint 2: prismatic joint, origin at [0.27, 0.2, 0.25], joint axis of [-1, 0, 0], handle 2: center at [0.08, 0.2, 0.20];
+joint 3: prismatic joint, origin at [0.25, 0.2, 0.35], joint axis of [-1, 0, 0], handle 3: center at [0.05, 0.2, 0.30];}
+[Scene End]
