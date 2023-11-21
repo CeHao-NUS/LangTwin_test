@@ -8,7 +8,7 @@ class OpenAICompletor:
         self.messages = []
 
     def answer(self, question):
-        self._add_questoin(question)
+        self._add_question(question)
         ans = self._get_completion()
         self._add_answer(ans)
         return self._last_message()
@@ -20,16 +20,22 @@ class OpenAICompletor:
                 ans += (message['content'] + "\n")
         return ans
     
+    def add_system(self, system):
+        self._add_system(system)
+    
     def add_question(self, question):
-        self._add_questoin(question)
+        self._add_question(question)
 
     def add_answer(self, answer):
         self._add_answer(answer)
 
     def _last_message(self):
         return self.messages[-1]['content']
+    
+    def _add_system(self, system):
+        self.messages.append({'role':'system', 'content':system})
 
-    def _add_questoin(self, question):
+    def _add_question(self, question):
         self.messages.append({'role':'user', 'content':question})
 
     def _add_answer(self, answer):

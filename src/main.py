@@ -6,40 +6,16 @@ import time
 
 
 def main(task, file_name): 
-    api_key = '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'
+    api_key = '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'
     openai.api_key = api_key
 
     robot_prompt = read_txt_file('prompts/robots/franka.txt')
     scene_prompt = read_txt_file('prompts/scenes/test_scene.txt')
 
-    all_reasoning = read_txt_file('prompts/tasks/all_reasoning.txt')
-
     perception_API = read_txt_file('prompts/APIs/perception.txt')
     controller_API = read_txt_file('prompts/APIs/controller.txt')
 
     completor = OpenAICompletor()
-
-    
-    # call all at once
-    '''
-    prompt_all = f" \
-        We will should you the Instructoin, Robot, Scene, and Task in the following. They are quote in [xxx Start] and [xxx End] \n \
-        Please answer sequentially according to the instructions. \n \
-        {all_reasoning} \n \
-        {robot_prompt} \n \
-        {scene_prompt} \n \
-        {perception_API} \n \
-        {controller_API} \n \
-        [Task Start] {task} [Task End] \n \
-    "
-
-    t0 = time.time()
-    ans = completor.answer(prompt_all)
-    t1 = time.time()
-    print(f"Time1: {t1-t0}")
-    write_txt_file(file_name, ans )
-    print(file_name)
-    '''
 
 
     # call one by one
@@ -49,17 +25,21 @@ def main(task, file_name):
     work2 = read_txt_file('prompts/tasks/work2.txt')
     work3 = read_txt_file('prompts/tasks/work3.txt')
 
-    prompt_work1 = f" \
+    initial_system = f" \
         - We will should you the Instructoin, Robot, Scene, and Task in the following. They are quote in [xxx Start] and [xxx End] \n \
         - Please answer sequentially according to the instructions. \
         {raw_intruction} \n \
         {robot_prompt} \n \
         {scene_prompt} \n \
         [Task Start] {task} [Task End] \n \
-        Please finish the following Work 1: \n \
-        {work1} \
     "
 
+    completor.add_system(initial_system)
+
+    prompt_work1 = f" \
+    - Please finish the following Work 1: \n \
+    {work1} \
+    "
     ans = completor.answer(prompt_work1)
 
     prompt_work2 = f" \
