@@ -17,13 +17,12 @@ class OpenAICompletorVision(OpenAICompletor):
         self._add_answer(ans)
         return self._last_message()
     
-    def _add_image_question(self, question, image_path):
-        base64_image = encode_image(image_path)
-        self.base64_image = base64_image
-        content = [
-           {"type": "text", "text": question},
-           {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{base64_image}"} }
-        ]
+    def _add_image_question(self, question, image_paths):
+        
+        base64_images = [encode_image(image_path) for image_path in image_paths]
+        content = [{"type": "text", "text": question} ] \
+            + [{"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{base64_image}"} } for base64_image in base64_images]
+            
         self.messages.append({'role':'user', 'content':content})
 
     def _get_completion(self):
