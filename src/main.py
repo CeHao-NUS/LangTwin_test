@@ -3,10 +3,10 @@ from utils.file_utils import *
 from llm.completor_openai import OpenAICompletor
 import time
 
-TASK_DIR = "./prompts/tasks"
+TASK_DIR = "./prompts/tasks/basic"
 SCENE_DIR = "./prompts/scenes"
 ROBOT_DIR = "./prompts/robots"
-api_key = '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'
+api_key = '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'
 
 def main(task, file_name): 
 

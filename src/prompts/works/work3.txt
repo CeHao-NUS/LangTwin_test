@@ -12,9 +12,10 @@ Outputs: JSON file that summarize the steps to finish the task.
 - To implement the movment, choose suitable Controller Function to execute the ""Move", "Grasp" and "Release" under certain constraints.
 - The available Controller Functions are provided between [Controller Start] and [Controller End]. Then the dictionary has "Controller": ["function name"].
 
-- The template of the answer is this examples in tripple asterisk.
+- The template of the answer is this examples in tripple asterisk and the dict is covered by ```.
 ***
 ==== Work 3 ====
+```
 {
     "Task": "put an apple into a drawer."
     "Sub tasks":[
@@ -58,5 +59,6 @@ Outputs: JSON file that summarize the steps to finish the task.
         }
     ]
 }
+```
 ***
 [Work 3 End]
