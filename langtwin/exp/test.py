@@ -40,7 +40,7 @@ def main():
     # initialize planner
     link_names, joint_names = env.init_plan_setting()
     planner = BasePlanner(link_names, joint_names)
-    for _ in range(1):
+    for _ in range(100):
         run(env, planner)
 
 def move_to(env, planner, pose, use_point_cloud=False):
@@ -101,7 +101,7 @@ def do_next_step(env, planner, step):
     if 'Detect' in perception:
         target_object_name = env.scene_json["target_object"]
         target_position_name = env.scene_json["target_container"]
-        print("target_object_name: ", target_object_name)
+
 
     # 2. actionable
     if actionable:
@@ -112,19 +112,21 @@ def do_next_step(env, planner, step):
     has_constraint = constraint != []
 
     # 4. target
-    if find_same_part(target[0], target_object_name):
-        target_pose = env.get_grasp_pose(object_name=target_object_name)
-    elif find_same_part(target[0], target_position_name):
-        target_pose = env.get_place_pose(container_name=target_position_name)
-    else:
-        target_pose = None
+    if target:
+        if find_same_part(target[0], target_object_name):
+            target_pose = env.get_grasp_pose(object_name=target_object_name)
+        elif find_same_part(target[0], target_position_name):
+            target_pose = env.get_place_pose(container_name=target_position_name)
+        else:
+            target_pose = None
 
-    if target_pose is None:
-        outside = ['above', 'outside']
+
+        outside = ['above', 'outside', 'top']
         inside = ['inside', 'in']
         if any(outword in target[0] for outword in outside):
             target_pose = copy.deepcopy(target_pose)
             target_pose[2] = target_pose[2] + 0.15
+            print('move to above')
 
     
     # 5. controller
