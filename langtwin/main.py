@@ -3,7 +3,7 @@ from utils.file_utils import *
 from llm.completor_openai import OpenAICompletor
 import time
 
-TASK_DIR = "./prompts/tasks/basic"
+TASK_DIR = "./prompts/tasks/physilogic/pick"
 SCENE_DIR = "./prompts/scenes"
 ROBOT_DIR = "./prompts/robots"
 api_key = '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'
@@ -68,6 +68,15 @@ def main(task, file_name):
 
     ans = completor.get_all_answers()
     write_txt_file(file_name, ans)
+
+    json_string = parse_assist(ans)
+    if json_string is not None:
+        json_file_name = file_name[:-4] + ".json"
+        write_json_file(json_file_name, json_string)
+        print(json_string)
+    else:
+        print('wrong parsing')
+
     print(file_name)
 
 
@@ -84,15 +93,15 @@ if __name__ == "__main__":
 
     tasks = os.listdir(TASK_DIR)
     tasks = [task[:-5] for task in tasks]
-    try_many_times(tasks[1], times=1)
+    # try_many_times(tasks[1], times=1)
 
     # import os
-    # from multiprocessing import Process
-    # import multiprocessing
+    from multiprocessing import Process
+    import multiprocessing
 
-    # with multiprocessing.Pool(processes=2) as pool:
+    with multiprocessing.Pool(processes=2) as pool:
         # Use the map function to apply the worker function to the list of numbers
-        # pool.map(try_many_times, tasks)
+        pool.map(try_many_times, tasks)
 
     # try_many_times(task1)
 

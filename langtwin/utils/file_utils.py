@@ -2,6 +2,21 @@
 import json
 import yaml
 import os
+import re
+import ast
+
+# ================ parse assist =================
+def parse_assist(file_string):
+    pattern = r"```(.*?)```"
+    match = re.search(pattern, file_string, re.DOTALL)
+    if match is not None:
+        match_str = match.group(1).strip()
+        match_dict = ast.literal_eval(match_str)
+        json_string = json.dumps(match_dict, indent=4)
+        return json_string
+    else:
+        return None
+    
 
 # ================ JSON ================
 # JSON file reader

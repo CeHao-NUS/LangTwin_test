@@ -1,0 +1,5 @@
+[Scene Start]
+You are in an office. There is a desk in front of you. 
+There are many objects on the desk. There are an apple, a pear and a bowl.
+There might be other objects.
+[Scene End]

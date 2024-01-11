@@ -13,7 +13,7 @@ if __name__ == '__main__':
     #     ```
     #     """
 
-    file_path = "/home/cehao/cehao/github_space/LangTwin_test/src/results/basic_open_cabinet/result0.txt"
+    file_path = "/home/msc/cehao/github_space/LangTwin_test/src/results/basic_open_cabinet/result0.txt"
     # read txt from file
     with open(file_path, 'r') as f:
         string = f.read()
@@ -64,6 +64,7 @@ if __name__ == '__main__':
 
     """
 
+    # string = "123"
 
     pattern = r"```(.*?)```"
     # pattern = r"***(.*?)***"
@@ -85,6 +86,12 @@ if __name__ == '__main__':
     # save json_string to json file
     with open('test.json', 'w') as f:
         json.dump(json_string, f)
+    
+
+    # load json_string 
+    with open('test.json', 'r') as f:
+        json_string2 = json.load(f)
+    print(json_string2)    
     
 
     # if match:
